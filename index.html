@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elite Project Manager</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="app" class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="logo">
+                <div class="logo-icon">PM</div>
+                <span class="logo-text">Project Elite</span>
+            </div>
+            <nav>
+                <ul class="nav-menu">
+                    <li class="nav-item">
+                        <button class="nav-link active" onclick="showPage('dashboard')">
+                            <span class="nav-icon">📊</span>
+                            <span class="nav-text">Dashboard</span>
+                        </button>
+                    </li>
+                    <li class="nav-item">
+                        <button class="nav-link" onclick="showPage('projects')">
+                            <span class="nav-icon">📁</span>
+                            <span class="nav-text">Projects</span>
+                        </button>
+                    </li>
+                    <li class="nav-item">
+                        <button class="nav-link" onclick="showPage('tasks')">
+                            <span class="nav-icon">✅</span>
+                            <span class="nav-text">Tasks</span>
+                        </button>
+                    </li>
+                    <li class="nav-item">
+                        <button class="nav-link" onclick="showPage('team')">
+                            <span class="nav-icon">👥</span>
+                            <span class="nav-text">Team</span>
+                        </button>
+                    </li>
+                    <li class="nav-item">
+                        <button class="nav-link" onclick="showPage('calendar')">
+                            <span class="nav-icon">📅</span>
+                            <span class="nav-text">Calendar</span>
+                        </button>
+                    </li>
+                    <li class="nav-item">
+                        <button class="nav-link" onclick="showPage('reports')">
+                            <span class="nav-icon">📈</span>
+                            <span class="nav-text">Reports</span>
+                        </button>
+                    </li>
+                    <li class="nav-item">
+                        <button class="nav-link" onclick="showPage('settings')">
+                            <span class="nav-icon">⚙️</span>
+                            <span class="nav-text">Settings</span>
+                        </button>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="header">
+                <div class="header-left">
+                    <button class="toggle-sidebar" onclick="toggleSidebar()">☰</button>
+                    <div class="search-box">
+                        <span class="search-icon">🔍</span>
+                        <input type="text" class="search-input" placeholder="Search projects, tasks..." id="searchInput">
+                    </div>
+                </div>
+                <div class="header-right">
+                    <button class="btn btn-secondary" onclick="showNotifications()">🔔 Notifications</button>
+                    <button class="btn btn-primary" onclick="openModal('project')">
+                        ➕ New Project
+                    </button>
+                </div>
+            </header>
+
+            <!-- Content Area -->
+            <div class="content" id="content">
+                <!-- Dashboard Page -->
+                <div id="dashboard-page" class="page active">
+                    <h1 class="page-title">Dashboard Overview</h1>
+                    
+                    <!-- Stats Grid -->
+                    <div class="dashboard-grid">
+                        <div class="stat-card">
+                            <div class="stat-header">
+                                <span class="stat-title">Total Projects</span>
+                                <div class="stat-icon primary">📊</div>
+                            </div>
+                            <div class="stat-value" id="totalProjects">0</div>
+                            <div class="stat-change positive">↑ 12% from last month</div>
+                        </div>
+                        
+                        <div class="stat-card">
+                            <div class="stat-header">
+                                <span class="stat-title">Active Tasks</span>
+                                <div class="stat-icon success">✓</div>
+                            </div>
+                            <div class="stat-value" id="activeTasks">0</div>
+                            <div class="stat-change positive">↑ 8% from last week</div>
+                        </div>
+                        
+                        <div class="stat-card">
+                            <div class="stat-header">
+                                <span class="stat-title">Team Members</span>
+                                <div class="stat-icon warning">👥</div>
+                            </div>
+                            <div class="stat-value">18</div>
+                            <div class="stat-change positive">↑ 2 new this month</div>
+                        </div>
+                        
+                        <div class="stat-card">
+                            <div class="stat-header">
+                                <span class="stat-title">Completion Rate</span>
+                                <div class="stat-icon danger">📈</div>
+                            </div>
+                            <div class="stat-value">87%</div>
+                            <div class="stat-change negative">↓ 3% from target</div>
+                        </div>
+                    </div>
+
+                    <!-- Recent Projects -->
+                    <h2 class="section-title">Recent Projects</h2>
+                    <div class="projects-container" id="recentProjects">
+                        <!-- Projects will be inserted here -->
+                    </div>
+
+                    <!-- Recent Tasks -->
+                    <div class="tasks-section">
+                        <div class="section-header">
+                            <h2 class="section-title">Recent Tasks</h2>
+                            <button class="btn btn-secondary" onclick="openModal('task')">Add Task</button>
+                        </div>
+                        <div id="recentTasks">
+                            <!-- Tasks will be inserted here -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Projects Page -->
+                <div id="projects-page" class="page">
+                    <div class="page-header">
+                        <h1 class="page-title">Projects</h1>
+                        <button class="btn btn-primary" onclick="openModal('project')">➕ New Project</button>
+                    </div>
+                    <div class="projects-container" id="allProjects">
+                        <!-- Projects will be inserted here -->
+                    </div>
+                </div>
+
+                <!-- Tasks Page -->
+                <div id="tasks-page" class="page">
+                    <div class="page-header">
+                        <h1 class="page-title">Tasks</h1>
+                        <button class="btn btn-primary" onclick="openModal('task')">➕ New Task</button>
+                    </div>
+                    <div class="tasks-section">
+                        <div id="allTasks">
+                            <!-- Tasks will be inserted here -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Team Page -->
+                <div id="team-page" class="page">
+                    <h1 class="page-title">Team Management</h1>
+                    <div class="team-grid" id="teamGrid">
+                        <!-- Team members will be displayed here -->
+                    </div>
+                </div>
+
+                <!-- Calendar Page -->
+                <div id="calendar-page" class="page">
+                    <h1 class="page-title">Calendar</h1>
+                    <div class="calendar-container">
+                        <div id="calendar">
+                            <!-- Calendar will be rendered here -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Reports Page -->
+                <div id="reports-page" class="page">
+                    <h1 class="page-title">Reports & Analytics</h1>
+                    <div class="reports-container">
+                        <canvas id="projectChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Settings Page -->
+                <div id="settings-page" class="page">
+                    <h1 class="page-title">Settings</h1>
+                    <div class="settings-container">
+                        <div class="setting-group">
+                            <h3>General Settings</h3>
+                            <label>
+                                <input type="checkbox" id="darkMode"> Enable Dark Mode
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal" id="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title" id="modalTitle">New Project</h2>
+                <button class="modal-close" onclick="closeModal()">×</button>
+            </div>
+            <form id="modalForm" onsubmit="handleSubmit(event)">
+                <div class="form-group">
+                    <label class="form-label">Name</label>
+                    <input type="text" class="form-input" id="itemName" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Description</label>
+                    <textarea class="form-textarea" id="itemDescription"></textarea>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Status</label>
+                    <select class="form-select" id="itemStatus">
+                        <option value="active">Active</option>
+                        <option value="pending">Pending</option>
+                        <option value="completed">Completed</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Priority</label>
+                    <select class="form-select" id="itemPriority">
+                        <option value="high">High</option>
+                        <option value="medium">Medium</option>
+                        <option value="low">Low</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Due Date</label>
+                    <input type="date" class="form-input" id="itemDueDate">
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" onclick="closeModal()">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Create</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
